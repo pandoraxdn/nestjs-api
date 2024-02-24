@@ -6,7 +6,7 @@ export class ActualizarTarea{
     @IsNotEmpty()
     @IsString()
     @IsOptional()
-    titulo: string;
+    titulo?: string;
 
     @IsString()
     @IsOptional()
