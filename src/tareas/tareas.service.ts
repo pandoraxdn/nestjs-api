@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { Tareas } from './schema/tareas.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { CrearTarea } from './dto/crear-tarea.dtop';
+import { CrearTarea } from './dto/crear-tarea.dto';
 import { ActualizarTarea } from './dto/actualizar-tarea.dto';
 
 @Injectable()
 export class TareasService {
 
     constructor(
-        @InjectModel(Tareas.name) private tareasModel : Model<Tareas>
+        @InjectModel( Tareas.name ) private tareasModel : Model<Tareas>
     ){}
 
     async create( tarea: CrearTarea ){

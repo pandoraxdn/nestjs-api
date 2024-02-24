@@ -4,7 +4,7 @@ import { TareasService } from './tareas.service';
 import { CrearTarea } from './dto/crear-tarea.dtop';
 import { ActualizarTarea } from './dto/actualizar-tarea.dto';
 
-@Controller('tareas')
+@Controller('api/v1/mongodb/tareas')
 export class TareasController {
 
     constructor( private tareasService: TareasService ){}
