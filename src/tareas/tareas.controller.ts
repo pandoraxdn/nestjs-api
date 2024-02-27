@@ -1,10 +1,10 @@
 import { Post, Body, ValidationPipe, Put, Delete, Get, Param } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { TareasService } from './tareas.service';
-import { CrearTarea } from './dto/crear-tarea.dtop';
+import { CrearTarea } from './dto/crear-tarea.dto';
 import { ActualizarTarea } from './dto/actualizar-tarea.dto';
 
-@Controller('api/v1/mongodb/tareas')
+@Controller('tareas')
 export class TareasController {
 
     constructor( private tareasService: TareasService ){}
