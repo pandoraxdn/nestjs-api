@@ -10,7 +10,7 @@ import { Usuarios } from './usuarios/entities/usuarios.entity';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/pandoradb'),
-      TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({
       type: 'mariadb',
       host: 'localhost',
       port: 3306,
@@ -20,11 +20,12 @@ import { Usuarios } from './usuarios/entities/usuarios.entity';
       entities: [ Usuarios ],
       synchronize: true, // no recomendable en producción
       autoLoadEntities: true, // cargar entidades en db
-      }),
+    }),
     TareasModule,
     UsuariosModule
    ],
   controllers: [AppController],
   providers: [AppService],
 })
+  
 export class AppModule {}
