@@ -6,6 +6,7 @@ import { TareasModule } from './tareas/tareas.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuarios } from './usuarios/entities/usuarios.entity';
+import { SensorModule } from './sensor/sensor.module';
 
 @Module({
   imports: [
@@ -14,15 +15,16 @@ import { Usuarios } from './usuarios/entities/usuarios.entity';
       type: 'mariadb',
       host: 'localhost',
       port: 3306,
-      username: 'najimi',
-      password: 'pass',
-      database: 'pandora',
+      username: 'root',
+      password: 'betaxdn1',
+      database: 'pandoradb',
       entities: [ Usuarios ],
       synchronize: true, // no recomendable en producción
       autoLoadEntities: true, // cargar entidades en db
     }),
     TareasModule,
-    UsuariosModule
+    UsuariosModule,
+    SensorModule
    ],
   controllers: [AppController],
   providers: [AppService],
