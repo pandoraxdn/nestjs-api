@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Login } from './entities/login.entity';
 import { CreateLogin } from './dto/create-login.dto';
 import { UpdateLogin } from './dto/update-login.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class LoginService {
@@ -14,11 +15,35 @@ export class LoginService {
     ){}
 
     async create( createLogin: CreateLogin ){
-        const new_user = this.loginRepository.create( createLogin );
+
+        const slatOrRounds = 10;
+        const hash = await bcrypt.hash( createLogin.password, slatOrRounds);
+        const register = { ...createLogin, password: hash };
+        const new_user = this.loginRepository.create( register );
+
         return await this.loginRepository.save( new_user );
+
     }
 
     async update( id_user: number, updateLogin: UpdateLogin ){
+
+        // Viejos habitos
+        /*
+        if( updateLogin.password ){
+            const slatOrRounds = 10;
+            const hash = await bcrypt.hash( updateLogin.password, slatOrRounds);
+            const register = { ...updateLogin, password: hash };
+            return await this.loginRepository.update( id_user, register );
+        }
+        */
+        
+        ( updateLogin.password ) && ( async () =>{
+            const slatOrRounds = 10;
+            const hash = await bcrypt.hash( updateLogin.password, slatOrRounds);
+            const register = { ...updateLogin, password: hash };
+            return await this.loginRepository.update( id_user, register );
+        })();
+
         return await this.loginRepository.update( id_user, updateLogin );
     }
     
