@@ -7,6 +7,8 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuarios } from './usuarios/entities/usuarios.entity';
 import { SensorModule } from './sensor/sensor.module';
+import { LoginModule } from './login/login.module';
+import { Login } from './login/entities/login.entity';
 
 @Module({
   imports: [
@@ -15,16 +17,28 @@ import { SensorModule } from './sensor/sensor.module';
       type: 'mariadb',
       host: 'localhost',
       port: 3306,
-      username: 'root',
-      password: 'betaxdn1',
+      username: 'najimi',
+      password: 'pass',
       database: 'pandoradb',
       entities: [ Usuarios ],
       synchronize: true, // no recomendable en producción
       autoLoadEntities: true, // cargar entidades en db
     }),
+    TypeOrmModule.forRoot({
+        type: 'postgres',
+        host: 'localhost',
+        port: 5432,
+        username: 'najimi',
+        password: 'pass',
+        database: 'pandora',
+        entities: [ Login ],
+        synchronize: true,
+        autoLoadEntities: true
+    }),
     TareasModule,
     UsuariosModule,
-    SensorModule
+    SensorModule,
+    LoginModule
    ],
   controllers: [AppController],
   providers: [AppService],
