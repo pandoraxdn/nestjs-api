@@ -14,6 +14,15 @@ export class LoginService {
         private loginRepository: Repository<Login>
     ){}
 
+    async login( updateLogin: UpdateLogin ){
+        try{
+            const user: Login = await this.loginRepository.findOneBy({ correo: updateLogin.correo });
+            return ( await bcrypt.compare( updateLogin.password, user.password) ) ? user : false;
+        }catch (error){
+            return false;
+        }
+    }
+
     async create( createLogin: CreateLogin ){
 
         const slatOrRounds = 10;

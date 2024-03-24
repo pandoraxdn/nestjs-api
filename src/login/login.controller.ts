@@ -19,6 +19,11 @@ export class LoginController {
        private loginService: LoginService
     ){}
 
+    @Post()
+    async login( @Body( new ValidationPipe() ) updateLogin: UpdateLogin ){
+        return await this.loginService.login(updateLogin);
+    }
+
     @Post('register')
     async create( @Body( new ValidationPipe() ) createLogin: CreateLogin ){
         return await this.loginService.create( createLogin );
