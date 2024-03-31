@@ -12,7 +12,8 @@ export class Login{
     @Column()
     password:   string;
 
-    @Column()
+    // Almacenar imagenes en base64 postgressql
+    @Column({ type: 'text' })
     image:      string;
 
     @Column()
