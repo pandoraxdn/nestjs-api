@@ -19,8 +19,6 @@ export class CreateLogin{
     password:   string;
 
     @IsString()
-    @MaxLength(255)
-    @MinLength(5)
     image:      string;
 
     @IsString()
