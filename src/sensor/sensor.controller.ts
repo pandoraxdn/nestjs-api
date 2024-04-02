@@ -33,4 +33,8 @@ export class SensorController {
         return this.sensorService.delete( id );
     }
 
+    @Get("data")
+    async data(){
+        return this.sensorService.data();
+    }
 }
