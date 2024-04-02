@@ -73,8 +73,8 @@ export class SensorService {
         const lastToday =  await this.findDays("today");
 
         const maxToday = lastToday.reduce(( max, obj ) => obj.distancia_cm > max ? obj.distancia_cm: max, lastToday[0].distancia_cm);
-        const minToday = lastToday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastToday[0].distancia_cm);
 
+        const minToday = lastToday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastToday[0].distancia_cm);
 
         const lastYesterday =  await this.findDays("yesterday");
 
