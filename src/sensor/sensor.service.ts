@@ -61,7 +61,11 @@ export class SensorService {
               $gte: startOfDay,
               $lte: endOfDay,
             }
-        }).limit(5);
+        })
+        .sort({
+            fecha : - 1,
+        })
+        .limit(5);
 
         return records;
     }
@@ -72,13 +76,21 @@ export class SensorService {
 
         const lastToday =  await this.findDays("today");
 
-        const maxToday = lastToday.reduce(( max, obj ) => obj.distancia_cm > max ? obj.distancia_cm: max, lastToday[0].distancia_cm);
+        const maxToday = (lastToday.length != 0) ? lastToday.reduce(( max, obj ) => obj.distancia_cm > max ? obj.distancia_cm: max, lastToday[0].distancia_cm) : 0;
 
-        const minToday = lastToday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastToday[0].distancia_cm);
+        const minToday = (lastToday.length != 0) ? lastToday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastToday[0].distancia_cm) : 0;
 
         const lastYesterday =  await this.findDays("yesterday");
 
+        const maxYesterday = (lastYesterday.length != 0 ) ? lastYesterday.reduce(( max, obj ) => obj.distancia_cm > max ? obj.distancia_cm: max, lastYesterday[0].distancia_cm) : 0;
+
+        const minYesterday = (lastYesterday.length != 0) ? lastYesterday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastYesterday[0].distancia_cm) : 0;
+
         const lastBeforeYesterday =  await this.findDays("beforeYesterday");
+
+        const maxBeforeYesterday = (lastBeforeYesterday.length != 0) ? lastBeforeYesterday.reduce(( max, obj ) => obj.distancia_cm > max ? obj.distancia_cm: max, lastBeforeYesterday[0].distancia_cm) : 0;
+
+        const minBeforeYesterday = (lastBeforeYesterday.length != 0) ? lastBeforeYesterday.reduce(( min, obj ) => obj.distancia_cm < min ? obj.distancia_cm: min, lastBeforeYesterday[0].distancia_cm) : 0;
 
         return {
             numberRegisters,
@@ -88,9 +100,13 @@ export class SensorService {
                 lastToday
             },
             yesterday:{
+                maxYesterday,
+                minYesterday,
                 lastYesterday,
             },
             beforeYesterday: {
+                maxBeforeYesterday,
+                minBeforeYesterday,
                 lastBeforeYesterday
             }
         }
